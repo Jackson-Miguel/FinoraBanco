@@ -1,0 +1,113 @@
+<ion-content [fullscreen]="true">
+  <ion-button id="exit" color="tertiary" (click)="sair()"
+    ><ion-icon name="exit" src="../../../assets/exit-outline.svg"></ion-icon
+  ></ion-button>
+
+  <div class="container">
+    <ion-card id="cardSaldo">
+      <ion-card-content>
+        <ion-label>Seu saldo: R$ </ion-label
+        ><ion-label>{{ valCont }}</ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="contLista">
+    <ion-list class="list">
+      <ion-label>Opções</ion-label>
+      <ion-item>
+        <ion-button color="tertiary" id="open-modalDep">Depositar</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="tertiary" id="open-modalSac">Sacar</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="tertiary" id="open-modalExt">Ver extrato</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-modal trigger="open-modalDep" (willDismiss)="onWillDismissDep($event)">
+    <div class="modContainer">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Deposito</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <br />
+          <ion-input
+            id="depInput"
+            label="Deposito"
+            label-placement="floating"
+            type="number"
+            [(ngModel)]="saldoD"
+            fill="outline"
+            placeholder="Digite o quanto você irá depositar"
+            maxlength="5"
+          ></ion-input>
+
+          <div class="btns">
+            <ion-button (click)="cancelDep()">Cancel</ion-button>
+            <ion-button (click)="confirmDep()">Confirm</ion-button>
+          </div>
+        </ion-content>
+      </ng-template>
+    </div>
+  </ion-modal>
+
+  <ion-modal trigger="open-modalSac" (willDismiss)="onWillDismissSac($event)">
+    <div class="modContainer">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Sacar</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <br />
+          <ion-input
+            id="depInput"
+            label="Sacar"
+            label-placement="floating"
+            type="number"
+            [(ngModel)]="saldoS"
+            fill="outline"
+            placeholder="Digite o quanto você irá sacar"
+            maxlength="5"
+          ></ion-input>
+
+          <div class="btns">
+            <ion-button (click)="cancelSac()">Cancel</ion-button>
+            <ion-button (click)="confirmSac()">Confirm</ion-button>
+          </div>
+        </ion-content>
+      </ng-template>
+    </div>
+  </ion-modal>
+
+  <ion-modal trigger="open-modalExt" (willDismiss)="onWillDismissSac($event)">
+    <div class="modContainer">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Extrato</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <br />
+          <ion-list>
+            <ion-item *ngFor="let item of historico">
+              <ion-label
+                ><h2>{{ item.tipo }}</h2>
+                <p>R$ {{ item.valor }}</p>
+                <p>{{ item.data }}</p></ion-label
+              >
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </div>
+  </ion-modal>
+</ion-content>

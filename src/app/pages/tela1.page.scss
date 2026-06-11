@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 30vh;
+}
+#cardSaldo {
+  width: 180px;
+  color: white;
+  text-align: center;
+}
+
+#exit{
+    display: flex;
+    justify-self: end;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.contLista{
+  display: flex;
+  justify-content: center;
+}
+.list{
+    ion-label{
+        margin-left: 10px;
+    }   
+      width: 280px;
+}
+.modContainer{
+    margin-top: 10px;
+    justify-content: center;
+}
+#depInput{
+  justify-self: center;
+  width: 300px;
+}
+.btns{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}

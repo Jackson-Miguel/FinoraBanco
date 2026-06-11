@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title id="txt_header"> Bem-vindo ao seu banco! </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container">
+    <ion-card id="cardLogin">
+      <ion-card-header>
+        <ion-card-title> Acesse sua conta </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-input
+          label="CPF"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Digite sue CPF"
+          [(ngModel)]="cpf"
+          maxlength="11"
+        ></ion-input>
+        <br />
+        <ion-input
+          label="Email"
+          type="email"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Digite sue Email"
+          [(ngModel)]="email"
+        ></ion-input>
+        <br />
+        <ion-button color="tertiary" (click)="login()">Entrar</ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
