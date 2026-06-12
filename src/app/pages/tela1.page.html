@@ -22,7 +22,9 @@
         <ion-button color="tertiary" id="open-modalSac">Sacar</ion-button>
       </ion-item>
       <ion-item>
-        <ion-button color="tertiary" id="open-modalExt">Ver extrato</ion-button>
+        <ion-button color="tertiary" id="open-modalExt" (click)="verExtra()"
+          >Ver extrato</ion-button
+        >
       </ion-item>
     </ion-list>
   </div>
@@ -49,8 +51,8 @@
           ></ion-input>
 
           <div class="btns">
-            <ion-button (click)="cancelDep()">Cancel</ion-button>
-            <ion-button (click)="confirmDep()">Confirm</ion-button>
+            <ion-button (click)="cancelDep()">Cancelar</ion-button>
+            <ion-button (click)="confirmDep()">Confirmar</ion-button>
           </div>
         </ion-content>
       </ng-template>
@@ -79,8 +81,8 @@
           ></ion-input>
 
           <div class="btns">
-            <ion-button (click)="cancelSac()">Cancel</ion-button>
-            <ion-button (click)="confirmSac()">Confirm</ion-button>
+            <ion-button (click)="cancelSac()">Cancelar</ion-button>
+            <ion-button (click)="confirmSac()">Confirmar</ion-button>
           </div>
         </ion-content>
       </ng-template>
@@ -91,8 +93,13 @@
     <div class="modContainer">
       <ng-template>
         <ion-header>
-          <ion-toolbar>
-            <ion-title>Extrato</ion-title>
+          <ion-toolbar class="toolBarExt">
+            <div class="title">
+              <ion-title>Extrato</ion-title>
+              <ion-button (click)="limparHistorico()" id="limpHist"
+                >Limpar Extrato</ion-button
+              >
+            </div>
           </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -102,7 +109,7 @@
               <ion-label
                 ><h2>{{ item.tipo }}</h2>
                 <p>R$ {{ item.valor }}</p>
-                <p>{{ item.data }}</p></ion-label
+                <p>{{ item.data | date:'dd/MM/yyyy HH:mm' }}</p></ion-label
               >
             </ion-item>
           </ion-list>

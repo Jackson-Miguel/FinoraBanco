@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -44,6 +44,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
     IonToolbar,
     IonHeader,
     FormsModule,
+    CommonModule,
   ],
 })
 export class Tela1Page implements OnInit {
@@ -52,15 +53,12 @@ export class Tela1Page implements OnInit {
     private modalCtrl: ModalController,
   ) {}
 
-historico = [];
+  historico: any[] = [];
 
-ngOnInit() {
-  this.historico = JSON.parse(
-    localStorage.getItem('historico') || '[]'
-  );
-    this.valCont = Number(localStorage.getItem("Saldo"));
+  ngOnInit() {
+    this.historico = JSON.parse(localStorage.getItem('historico') || '[]');
+    this.valCont = Number(localStorage.getItem('Saldo'));
   }
-
 
   sair() {
     this.router.navigate(['/home']);
@@ -69,9 +67,7 @@ ngOnInit() {
   valCont = 0;
   saldoD!: number | string;
   saldoS!: number | string;
-  depInput = document.getElementById("depInput") as HTMLInputElement
-
-  
+  depInput = document.getElementById('depInput') as HTMLInputElement;
 
   cancelDep() {
     return this.modalCtrl.dismiss(null, 'cancelD');
@@ -89,10 +85,19 @@ ngOnInit() {
     return this.modalCtrl.dismiss(this.saldoS, 'confirmS');
   }
 
+  verExtra() {
+    this.historico = JSON.parse(localStorage.getItem('historico') || '[]');
+  }
+
+  limparHistorico() {
+    localStorage.setItem('historico', '[]');
+    this.historico = [];
+  }
+  
   onWillDismissDep(event: CustomEvent<OverlayEventDetail>) {
     if (event.detail.role === 'confirmD') {
       this.valCont = Number(this.valCont) + Number(event.detail.data);
-      localStorage.setItem("Saldo", this.valCont.toString());
+      localStorage.setItem('Saldo', this.valCont.toString());
       this.adicionarHistorico('Deposito', Number(this.saldoD));
       this.saldoD = '';
     }
@@ -100,11 +105,11 @@ ngOnInit() {
 
   onWillDismissSac(event: CustomEvent<OverlayEventDetail>) {
     if (event.detail.role === 'confirmS') {
-      if(Number(this.saldoS) > this.valCont){
-        alert("Não é possivel sacar essse valor");
-      }else{
+      if (Number(this.saldoS) > this.valCont) {
+        alert('Não é possivel sacar essse valor');
+      } else {
         this.valCont = Number(this.valCont) - Number(event.detail.data);
-        localStorage.setItem("Saldo", this.valCont.toString());
+        localStorage.setItem('Saldo', this.valCont.toString());
         this.adicionarHistorico('Saque', Number(this.saldoS));
         this.saldoS = '';
       }
@@ -112,19 +117,14 @@ ngOnInit() {
   }
 
   adicionarHistorico(tipo: string, valor: number) {
-  const historico = JSON.parse(
-    localStorage.getItem('historico') || '[]'
-  );
+    const historico = JSON.parse(localStorage.getItem('historico') || '[]');
 
-  historico.push({
-    tipo,
-    valor,
-    data: new Date().toISOString()
-  });
+    historico.push({
+      tipo,
+      valor,
+      data: new Date().toISOString(),
+    });
 
-  localStorage.setItem(
-    'historico',
-    JSON.stringify(historico)
-  );
-}
+    localStorage.setItem('historico', JSON.stringify(historico));
+  }
 }
