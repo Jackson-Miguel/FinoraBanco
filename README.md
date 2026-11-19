@@ -1,4 +1,4 @@
-# Finora
+# Finora Banco
 
 Uma aplicação bancária desenvolvida para simular
 operações financeiras de maneira simples e intuitiva.
